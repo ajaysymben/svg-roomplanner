@@ -1,66 +1,20 @@
 {
   "name": "svg-roomplanner",
-  "version": "0.0.0",
-  "description": "",
-  "homepage": "",
-  "author": {
-    "name": "James0x57",
-    "email": "",
-    "url": ""
-  },
+  "version": "1.0.0",
+  "description": "LICENSE",
+  "main": "build.js",
   "scripts": {
-    "test": "testee src/test.html --browsers firefox --reporter Spec",
-    "start": "NODE_ENV=production node api/",
-    "develop": "node api/ --develop",
-    "document": "documentjs",
-    "build": "node build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "main": "svg-roomplanner/index.stache!done-autorender",
-  "files": [
-    "src"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajaysymben/svg-roomplanner.git"
+  },
   "keywords": [],
-  "system": {
-    "main": "svg-roomplanner/index.stache!done-autorender",
-    "directories": {
-      "lib": "src"
-    },
-    "configDependencies": [
-      "live-reload"
-    ],
-    "npmIgnore": [
-      "documentjs",
-      "testee",
-      "donejs-deploy",
-      "generator-donejs",
-      "mysql",
-      "body-parser"
-    ]
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajaysymben/svg-roomplanner/issues"
   },
-  "dependencies": {
-    "body-parser": "^1.14.1",
-    "can": "^2.3.0-beta.5",
-    "can-connect": "^0.3.1",
-    "can-ssr": "^0.9.4",
-    "done-autorender": "^0.4.3",
-    "done-component": "^0.2.1",
-    "done-css": "^1.1.11",
-    "generator-donejs": "^0.3.2",
-    "jquery": "^2.1.4",
-    "mysql": "^2.9.0",
-    "nodemailer": "^1.8.0",
-    "steal": "^0.12.0-pre.9"
-  },
-  "devDependencies": {
-    "documentjs": "^0.3.3",
-    "donejs-cli": "^0.6.6",
-    "donejs-deploy": "^0.2.0",
-    "funcunit": "^3.0.0",
-    "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.12.0-pre.5",
-    "testee": "^0.2.1"
-  },
-  "engines": {
-    "node": "0.12.7"
-  }
+  "homepage": "https://github.com/ajaysymben/svg-roomplanner#readme"
 }
