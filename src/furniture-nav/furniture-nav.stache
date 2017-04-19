@@ -1,0 +1,33 @@
+<div class="current-room">
+	<div class="label">Current Room:</div>
+	<div class="title">{{roomname}}</div>
+</div>
+<div class="search-area">
+	<i class="icon-search"></i>
+	<input type="text">
+</div>
+<div class="category-dd-current">
+	{{#if currentCategoryText}}
+		<div class="current-category">{{currentCategoryText}}</div>
+	{{/if}}
+	<div class="current-subcategory">{{currentSubcategoryText}}</div>
+	<i class="icon-chevron"></i>
+</div>
+{{#if categoryMenuOpen}}
+	<ul class="categories">
+		{{#partsByCategory}}
+			{{#each ./subcategories}}
+				<li ($click)="subcategorySelected( ../category, ./subcategory )">
+					{{^is ./category ./subcategory}}
+						<div class="category">{{./category}}</div>
+					{{/is}}
+					<div class="subcategory">{{./subcategory}}</div>
+				</li>
+			{{/each}}
+		{{/partsByCategory}}
+	</ul>
+{{/if}}
+<div class="results">
+    <can-import from="svg-roomplanner/isvg-parts/" />
+    <interactive-svg-parts {config}="isvgPartsConfig"></interactive-svg-parts>
+</div>

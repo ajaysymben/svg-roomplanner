@@ -1,0 +1,214 @@
+interactive-svg {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	-webkit-transform: translate( -50%, -50% );
+	transform: translate( -50%, -50% );
+
+	&, & * {
+		box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+
+	/*
+		background-color: transparent;
+		background-repeat: no-repeat;
+		background-image: linear-gradient( 180deg,
+			transparent 0px,
+			transparent 49.5%,
+			#CCCCCC 50%,
+			transparent 50.5%,
+			transparent
+		),
+		linear-gradient( 90deg,
+			transparent 0px,
+			transparent 49.5%,
+			#CCCCCC 50%,
+			transparent 50.5%,
+			transparent
+		);
+		background-position: top left;
+		background-size: 100% 100%;
+	*/
+
+	.floor-x {
+		position: absolute;
+		top: -25px;
+		left: 50%;
+		-webkit-transform: translateX( -50% );
+		transform: translateX( -50% );
+		font-weight: bold;
+	}
+
+	.floor-y {
+		position: absolute;
+		left: -20px;
+		top: 50%;
+		-webkit-transform: translateY( -50% ) rotate( -90deg );
+		transform: translateY( 12px ) rotate( -90deg );
+		width: 0px;
+		white-space: nowrap;
+		font-weight: bold;
+	}
+
+	.icon-tape-measure {
+		position: absolute;
+		top: -37px;
+		right: -32px;
+		font-size: 56px;
+		cursor: pointer;
+		border-radius: 20px;
+		width: 56px;
+		height: 34px;
+		vertical-align: middle;
+		overflow: hidden;
+
+		&:before {
+			position: absolute;
+			top: -12px;
+			left: -12px;
+		}
+
+		&.measurement-state-on {
+			color: #666600;
+			text-shadow: 0 0 5px #CCCC00, 0 0 5px #CCCC00, 0 0 5px #CCCC00, 0 0 5px #CCCC00;
+		}
+	}
+
+	.measuerment-info {
+		position: absolute;
+		display: inline-block;
+		-webkit-transform: translate( -50%, -50% );
+		transform: translate( -50%, -50% );
+		border-radius: 10px;
+		padding: 3px;
+		background-color: rgba( 255, 255, 255, 0.8 );
+	}
+
+	svg {
+		width: 100%;
+		height: 100%;
+
+		&.showGrid {
+			background-color: transparent;
+			background-repeat: repeat;
+			background-image: linear-gradient( 180deg,
+				#CCCCCC 0px,
+				transparent 1px,
+				transparent
+			),
+			linear-gradient( 90deg,
+				#CCCCCC 0px,
+				transparent 1px,
+				transparent
+			);
+			background-position: top left;
+			background-size: 20px 20px; //defaults, overwritten with js to show scale
+		}
+	}
+
+	.blur-shield,
+	.measurment-field {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.part-controls {
+		position: absolute;
+		outline: 1px dashed #777777;
+
+		.resizehandle {
+			position: absolute;
+			width: 22px;
+			height: 22px;
+			border: 2px solid #000000;
+			cursor: pointer;
+			background-color: #FFFFFF;
+			box-shadow: 0 0 4px #FFFFFF;
+			display: none;
+		}
+		&.resizeable {
+			outline: none;
+			
+			.resizehandle {
+				display: block;
+			}
+		}
+		.top {
+			top: -20px;
+		}
+		.left {
+			left: -20px;
+		}
+		.right {
+			right: -20px;
+		}
+		.bottom {
+			bottom: -20px;
+		}
+
+		.rotationhandle {
+			position: absolute;
+			font-size: 21px;
+			padding-top: 2px;
+			width: 32px;
+			height: 30px;
+			bottom: -35px;
+			left: ~"calc( 50% - 1px )";
+			-webkit-transform: translateX( -50% );
+			transform: translateX( -50% );
+			border-radius: 15px;
+			cursor: pointer;
+			background-color: #FFFFFF;
+			box-shadow: 0 0 4px #FFFFFF;
+		}
+	}
+
+	.part-options {
+		background-color: #000000;
+		height: 70px;
+		width: 242px;
+		position: absolute;
+		@padding: 10px;
+		padding: @padding;
+		border-radius: 5px;
+
+		.part-title {
+			color: #FFFFFF;
+			display: block;
+		}
+		.part-dimensions {
+			color: #FFFFFF;
+			position: absolute;
+			bottom: @padding;
+			left: @padding;
+
+			input {
+				width: 58px;
+				color: #FFFFFF;
+				border-radius: 2px;
+				border: 1px solid #FFFFFF;
+				background-color: #000000;
+				padding: 4px;
+			}
+		}
+		.part-menu {
+			position: absolute;
+			bottom: @padding;
+			right: @padding;
+			width: 85px;
+			text-align: right;
+
+			i {
+				color: #FFFFFF;
+				cursor: pointer;
+			}
+		}
+	}
+}

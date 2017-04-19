@@ -1,0 +1,505 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{asset "css"}}
+    {{asset "html5shiv"}}
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script type="text/javascript" src="/three-js/three.min.js"></script>
+    <script type="text/javascript" src="/three-js/renderers/CanvasRenderer.js"></script>
+    <script type="text/javascript" src="/three-js/renderers/Projector.js"></script>
+    <script type="text/javascript" src="/three-js/loaders/ColladaLoader.js"></script>
+  </head>
+  <body>
+    <can-import from="svg-roomplanner/styles.less!" />
+    <can-import from="svg-roomplanner/app" export-as="viewModel" />
+
+    <can-import from="svg-roomplanner/main-nav/" />
+    <main-nav {(parts-menu-expanded)}="partsMenuExpanded" {(menu-action)}="menuAction" {client-info}="clientInfo"></main-nav>
+
+    {{#if clientInfo}}
+      <can-import from="svg-roomplanner/furniture-nav/" />
+      <furniture-nav {(roomname)}="roomname" class="{{#if partsMenuExpanded}}expanded{{/if}}" {(parts-menu-expanded)}="partsMenuExpanded" {^parts-by-category}="partsByCategory" {client-info}="clientInfo"></furniture-nav>
+    {{/if}}
+
+    <div class="planning-area">
+      <can-import from="svg-roomplanner/isvg/" />
+      {{#if isvgConfig.width}}
+        <interactive-svg {config}="isvgConfig"></interactive-svg>
+      {{/if}}
+    </div>
+
+    {{#if show3DButton}}
+      <div class="view-3d-toggler {{#is menuAction '3d'}}returntoplanner{{/is}}" ($click)="menuActionToggle3D()">
+        {{#if isvgConfig.width}}
+          {{#is menuAction "none"}}
+            3D VIEW
+          {{/is}}
+          {{#is menuAction "3d"}}
+            Return To Planner
+          {{/is}}
+        {{/if}}
+      </div>
+    {{/if}}
+
+    {{#is menuAction "gettingstarted"}}
+      <div class="menu-action-top">
+        Welcome to the Science Room Planner
+      </div>
+      <div class="menu-action-left">
+        <div class="scrollable">
+          <span>&nbsp;</span>
+          <b>Whether planning a new or remodeled science room, get started using these easy-to-follow steps!</b><br>
+          <br>
+          - To create a plan with your room dimensions select New.<br>
+          <br>
+          - To create a plan with a template room, select a room from the planning area to the right.<br>
+          <br>
+          - Next, choose a furniture category from the menu on the left.<br>
+          <br>
+          - Create your room plan using furniture from the furniture library.<br>
+          <br>
+          - Click or touch and drag furniture icons into the room.<br>
+          <br>
+          - Click or tap any of the furniture icons in the plan to open the planning tools.<br>
+          <br>
+          - Click or touch the circular rotate icon to rotate any object.<br>
+          <br>
+          - Click or touch any of the four square resize icons to resize  any object.<br>
+          <br>
+          - Use "Help" for an overview of the planning tools available.<br>
+          <br>
+          - Click on "Item Summary" to view a list of items placed.<br>
+          <br>
+          - Save your project using your email for future review.<br>
+          <br>
+          - Print your project.<br>
+          <br>
+          - Request a safety review &amp; estimate of your project.<br>
+          <br>
+          Thank you for using the Science Room Planner.<br>
+        </div>
+      </div>
+      <div class="menu-action-right">
+        <can-import from="svg-roomplanner/pre-saved-rooms/" />
+        {{#if clientInfo}}
+          <pre-saved-rooms {client-info}="clientInfo" {^roomname}="roomname" {(isvg-config)}="isvgConfig" {(menu-action)}="menuAction" {(rooms)}="preSavedRooms"></pre-saved-rooms>
+        {{/if}}
+      </div>
+    {{/is}}
+    {{#is menuAction "help"}}
+      <div class="menu-action-top">
+        Welcome to the Room Planner
+      </div>
+      <div class="menu-action-left">
+        <div class="button secondary" ($click)="menuActionNone()">
+          Return To Planner
+        </div>
+      </div>
+      <div class="menu-action-right">
+        <div class="backdrop">
+          <span>&nbsp;</span><br>
+          <b>ROOM PLANNER - HELP</b><br>
+          <br>
+          Welcome to the Room Planner.<br>
+          Whether planning a new or remodeled room, creating, sharing and improving a room plan is simple using these easy-to-follow steps!<br>
+          <br>
+          <br>
+          <b>NEW PLAN</b><br>
+          - To create a plan with your room dimensions select NEW. Add your room name and dimensions in the left panel of the planner. Select the "Create Room" button to begin adding furniture to your room.<br>
+          <br>
+          <br>
+          <b>USING PRE-PLANNED ROOMS</b><br>
+          - To create a plan with a template room, select a room from the planning area to the right.<br>
+          <img src="/src/img/FlinnSciLogo V1.2.jpg" alt=""><br>
+          <br>
+          <br>
+          <b>ADDING FURNITURE ITEMS</b><br>
+          - Choose a furniture category from the left pull down menu.<br>
+          <img src="/src/img/FlinnSciPlanner3.0.jpg" alt=""><br>
+          <br>
+          - Create your room plan using furniture from the furniture library.<br>
+          - Click or touch and drag furniture icons into the room.<br>
+          <img src="/src/img/FlinnSciPlanner5.0.jpg" alt=""><br>
+          <br>
+          <br>
+          <b>TOOLS – ROTATE, CONE AND RESIZE ITEMS</b><br>
+          - Click or tap any of the furniture icons in the plan to open the planning tools.<br>
+          - Click or touch the circular rotate icon to rotate any object.<br>
+          <img src="/src/img/FlinnSciPlanner6.2.jpg" alt=""><br>
+          <br>
+          - Click or touch any of the double overlapping square icons in the tool box to clone any object.<br>
+          <img src="/src/img/FlinnSciPlanner6.1.jpg" alt=""><br>
+          <br>
+          - Click or touch any of the four square icons next to the furniture icon to resize any object.<br>
+          <img src="/src/img/FlinnSciPlanner6.3.jpg" alt=""><br>
+          <br>
+          - Click or touch the tape ruler icon to measure the distance between items placed in your plan. This opens the measure tool. You can then click or touch and drag from anywhere on the plan to another spot on the plan to view the distance. The line will change color when you have aligned the measure tool to create a straight line.<br>
+          <img src="/src/img/FlinnSciPlanner10.0.jpg" alt=""><br>
+          <br>
+          <br>
+          <b>VIEW LIST OF ITEMS AND COST (If included in your version)</b><br>
+          - Click on "Item Summary" to view a list of items placed in your plan.<br>
+          <img src="/src/img/FlinnSciPlanner7.0.jpg" alt=""><br>
+          <br>
+          <br>
+          <b>SAVE OR PRINT YOUR PROJECT</b><br>
+          - Save your project using your email for future review.<br>
+          <img src="/src/img/FlinnSciPlanner8.1.jpg" alt=""><br>
+          <br>
+          - Print your project. An image of your planned room along with the list of items will be included in your print file.<br>
+          <img src="/src/img/FlinnSciPlanner8.0.jpg" alt=""><br>
+          <br>
+          - Return to the planner and enter your email address to retrieve all previously saved plans<br>
+          <img src="/src/img/FlinnSciPlanner9.0.jpg" alt=""><br>
+          <br>
+          <br>
+          <b>ADD NOTES TO YOUR PROJECT FILE</b><br>
+          - Request a safety review &amp; estimate of your project.<br>
+          <br>
+          Thank you for using the Science Room Planner.<br>
+          <br>
+        </div>
+      </div>
+    {{/is}}
+    {{#is menuAction "new"}}
+      <div class="menu-action-top">
+        Enter your desired dimensions below, or select a template from the right to get started.
+      </div>
+      <div class="menu-action-left">
+        <div>
+          <span>&nbsp;</span>
+          <span>Room Name:</span>
+          <input class="room-name" type="text">
+        </div>
+        <div>
+          <span>Width:</span>
+          <input class="width-feet" type="number">'
+          <input class="width-inches" type="number">"
+        </div>
+        <div>
+          <span>Length:</span>
+          <input class="length-feet" type="number">'
+          <input class="length-inches" type="number">"
+        </div>
+        <div class="button" ($click)="createRoom()">
+          Create Room
+        </div>
+        <div class="button secondary" ($click)="menuActionNone()">
+          Cancel
+        </div>
+      </div>
+      <div class="menu-action-right">
+        <can-import from="svg-roomplanner/pre-saved-rooms/" />
+        <pre-saved-rooms {client-info}="clientInfo" {^roomname}="roomname" {(isvg-config)}="isvgConfig" {(menu-action)}="menuAction" {(rooms)}="preSavedRooms"></pre-saved-rooms>
+      </div>
+    {{/is}}
+    {{#is menuAction "3d"}}
+      <div class="view-3d-container">
+        <can-import from="svg-roomplanner/view-3d/" />
+        <view-3d></view-3d>
+      </div>
+    {{/is}}
+    {{#is menuAction "open"}}
+      <div class="menu-action-top">
+        Enter your email address to find rooms you've saved
+      </div>
+      <div class="menu-action-left">
+        <div>
+          <span>&nbsp;</span>
+          <span>Email:</span>
+          <input class="room-email" type="text">
+        </div>
+        <div class="button" ($click)="searchRooms()">
+          Find Saved Room(s)
+        </div>
+        {{#savedRoomsList}}
+          <div class="open-saved-room">
+            {{^if ./id}}
+              <div>{{./title}}</div>
+            {{else}}
+              <div ($click)="loadRoomFromID( ./id )">
+                {{./title}}
+              </div>
+              <i class="icon-trash-can" ($click)="deleteRoom( ./id, ./title )"></i>
+            {{/if}}
+          </div>
+        {{/savedRoomsList}}
+        <div class="button secondary" ($click)="menuActionNone()">
+          Cancel
+        </div>
+      </div>
+      <div class="menu-action-right">
+        <can-import from="svg-roomplanner/pre-saved-rooms/" />
+        <pre-saved-rooms {client-info}="clientInfo" {^roomname}="roomname" {(isvg-config)}="isvgConfig" {(menu-action)}="menuAction" {(rooms)}="preSavedRooms"></pre-saved-rooms>
+      </div>
+    {{/is}}
+    {{#is menuAction "save"}}
+      <div class="menu-action-top">
+        Save your roomplan! You will be given the option to print once it has been saved.
+      </div>
+      <div class="menu-action-left">
+        <div>&nbsp;</div>
+        {{#saveFields}}
+          {{#if ./included}}
+            <div>
+              <span class="{{#if ./required}}required{{/if}}" {{#if ./required}}title="This field is required"{{/if}}>
+                {{./label}}:
+              </span>
+              {{#is ./id 2}}
+                <input class="room-name" name="roomname" type="text" {($value)}="roomname">
+              {{/is}}
+              {{#is ./id 12}}
+                <input class="room-firstandlastname" type="text">
+              {{/is}}
+              {{#is ./id 22}}
+                <input class="room-email" type="text">
+              {{/is}}
+              {{#is ./id 32}}
+                <input class="room-phone" type="text">
+              {{/is}}
+              {{#is ./id 42}}
+                <input class="room-school" type="text">
+              {{/is}}
+              {{#is ./id 52}}
+                <select class="room-state">
+                  <option value="Alabama">Alabama</option>
+                  <option value="Alaska">Alaska</option>
+                  <option value="Arizona">Arizona</option>
+                  <option value="Arkansas">Arkansas</option>
+                  <option value="California">California</option>
+                  <option value="Colorado">Colorado</option>
+                  <option value="Connecticut">Connecticut</option>
+                  <option value="Delaware">Delaware</option>
+                  <option value="Florida">Florida</option>
+                  <option value="Georgia">Georgia</option>
+                  <option value="Hawaii">Hawaii</option>
+                  <option value="Idaho">Idaho</option>
+                  <option value="Illinois">Illinois</option>
+                  <option value="Indiana">Indiana</option>
+                  <option value="Iowa">Iowa</option>
+                  <option value="Kansas">Kansas</option>
+                  <option value="Kentucky">Kentucky</option>
+                  <option value="Louisiana">Louisiana</option>
+                  <option value="Maine">Maine</option>
+                  <option value="Maryland">Maryland</option>
+                  <option value="Massachusetts">Massachusetts</option>
+                  <option value="Michigan">Michigan</option>
+                  <option value="Minnesota">Minnesota</option>
+                  <option value="Mississippi">Mississippi</option>
+                  <option value="Missouri">Missouri</option>
+                  <option value="Montana">Montana</option>
+                  <option value="Nebraska">Nebraska</option>
+                  <option value="Nevada">Nevada</option>
+                  <option value="New Hampshire">New Hampshire</option>
+                  <option value="New Jersey">New Jersey</option>
+                  <option value="New Mexico">New Mexico</option>
+                  <option value="New York">New York</option>
+                  <option value="North Carolina">North Carolina</option>
+                  <option value="North Dakota">North Dakota</option>
+                  <option value="Ohio">Ohio</option>
+                  <option value="Oklahoma">Oklahoma</option>
+                  <option value="Oregon">Oregon</option>
+                  <option value="Pennsylvania">Pennsylvania</option>
+                  <option value="Rhode Island">Rhode Island</option>
+                  <option value="South Carolina">South Carolina</option>
+                  <option value="South Dakota">South Dakota</option>
+                  <option value="Tennessee">Tennessee</option>
+                  <option value="Texas">Texas</option>
+                  <option value="Utah">Utah</option>
+                  <option value="Vermont">Vermont</option>
+                  <option value="Virginia">Virginia</option>
+                  <option value="Washington">Washington</option>
+                  <option value="West Virginia">West Virginia</option>
+                  <option value="Wisconsin">Wisconsin</option>
+                  <option value="Wyoming">Wyoming</option>
+                  <option value="Alberta">Alberta</option>
+                  <option value="British Columbia">British Columbia</option>
+                  <option value="Manitoba">Manitoba</option>
+                  <option value="New Brunswick">New Brunswick</option>
+                  <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                  <option value="Nova Scotia">Nova Scotia</option>
+                  <option value="Ontario">Ontario</option>
+                  <option value="Prince Edward Island">Prince Edward Island</option>
+                  <option value="Quebec">Quebec</option>
+                  <option value="Saskatchewan">Saskatchewan</option>
+                </select>
+              {{/is}}
+              {{#is ./id 62}}
+                <input class="room-zip" type="text">
+              {{/is}}
+              {{#is ./id 72}}
+                <input class="room-timeframe" type="radio" name="room-timeframe" id="room-timeframe-1" value="1 to 3 months">
+                <label for="room-timeframe-1">1 to 3 months</label><br>
+
+                <input class="room-timeframe" type="radio" name="room-timeframe" id="room-timeframe-3" value="3 to 6 months">
+                <label for="room-timeframe-3">3 to 6 months</label><br>
+
+                <input class="room-timeframe" type="radio" name="room-timeframe" id="room-timeframe-6" value="6 to 12 months">
+                <label for="room-timeframe-6">6 to 12 months</label><br>
+
+                <input class="room-timeframe" type="radio" name="room-timeframe" id="room-timeframe-12" value="More than 12 months">
+                <label for="room-timeframe-12">More than 12 months</label><br>
+
+                <input class="room-timeframe" type="radio" name="room-timeframe" id="room-timeframe-100" value="Waiting for bond/funding">
+                <label for="room-timeframe-100">Waiting for bond/funding</label>
+              {{/is}}
+              {{#is ./id 82}}
+                <textarea class="room-comments"></textarea>
+              {{/is}}
+            </div>
+          {{/if}}
+        {{/saveFields}}
+        <div class="button" ($click)="saveRoom()">
+          Save Room
+        </div>
+        <div class="button secondary" ($click)="menuActionNone()">
+          Cancel
+        </div>
+      </div>
+      <div class="menu-action-right">
+      </div>
+    {{/is}}
+    {{#is menuAction "summary"}}
+      <div class="menu-action-top" ($inserted)="loadItemSummary()">
+        Item Summary
+      </div>
+      <div class="menu-action-left">
+        <div>
+          &nbsp;<br>
+          If this plan looks good, save your project. A link will be sent to your email for sharing and future review. We'll be in touch for a complete safety review of your project.
+        </div>
+        <div class="button secondary" ($click)="menuActionNone()">
+          Return To Planner
+        </div>
+        <div>&nbsp;</div>
+      </div>
+      <div class="menu-action-right">
+        <div class="backdrop">
+          <b>Item Summary</b><br>
+          <br>
+          <table>
+            <tr>
+              <th width="20%">Item Number</th>
+              <th width="40%">Description</th>
+              <th width="10%">Quantity</th>
+              <th width="12%">Price (Each)</th>
+              <th width="18%">Extended Price</th>
+            </tr>
+            {{#each itemSummary}}
+              <tr>
+                <td>{{./itemnumber}}</td>
+                <td>{{./itemname}}</td>
+                <td>{{./qty}}</td>
+                <td>${{extendedPrice( 1, ./unitprice )}}</td>
+                <td>${{extendedPrice( ./qty, ./unitprice )}}</td>
+              </tr>
+            {{/each}}
+          </table>
+          <div class="summary-totals">
+            {{#itemSummaryTotal}}
+              <b>Total:&nbsp;&nbsp;&nbsp;${{itemSummaryTotal}}&nbsp;&nbsp;&nbsp;</b><br>
+            {{/itemSummaryTotal}}
+            <br>
+            <div class="button" ($click)="menuActionNone()">
+              Return To Planner
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/is}}
+    {{#is menuAction "print"}}
+      <div class="menu-action-print">
+        <div class="button" ($click)="menuActionNone()">
+          Return To Planner
+        </div>
+        <b style="display:block;">{{roomname}}</b><br>
+        <div class="print-svg-container print-break-page-after" ($inserted)="cloneRoomSVGTo( %element )"></div><br>
+        <div ($inserted)="loadItemSummary()">
+          <b>Item Summary</b><br>
+          <br>
+          <table>
+            <tr>
+              <th width="20%">Item Number</th>
+              <th width="40%">Description</th>
+              <th width="10%">Quantity</th>
+              <th width="12%">Price (Each)</th>
+              <th width="18%">Extended Price</th>
+            </tr>
+            {{#each itemSummary}}
+              <tr>
+                <td>{{./itemnumber}}</td>
+                <td>{{./itemname}}</td>
+                <td>{{./qty}}</td>
+                <td>${{extendedPrice( 1, ./unitprice )}}</td>
+                <td>${{extendedPrice( ./qty, ./unitprice )}}</td>
+              </tr>
+            {{/each}}
+          </table>
+          <div class="summary-totals">
+            {{#itemSummaryTotal}}
+              <b>Total:&nbsp;&nbsp;&nbsp;${{itemSummaryTotal}}&nbsp;&nbsp;&nbsp;</b><br>
+            {{/itemSummaryTotal}}
+            <br>
+            <div>
+              <div style="display: inline-block; width: 32%; vertical-align: middle; text-align: center;">
+                {{#if clientInfo.logo}}
+                  <img src="{{clientInfo.logo}}" alt="[client logo]" width="100%">
+                {{/if}}
+              </div>
+              <div style="display: inline-block; width: 66%; vertical-align: middle; text-align: center;">
+                <pre>{{clientInfo.address}}</pre>
+              </div>
+            </div>
+            <div class="button secondary" ($click)="menuActionNone()">
+              Return To Planner
+            </div>
+          </div>
+        </div>
+        <br><br>
+      </div>
+    {{/is}}
+    {{#is menuAction "message"}}
+      <div class="menu-action-top"></div>
+      <div class="menu-action-left">
+        {{#if showPrintButtonOnMessage}}
+          <div class="button" ($click)="menuActionPrint()">
+            Print Plan
+          </div>
+        {{/if}}
+        {{#if showReturnButtonOnMessage}}
+          <div class="button" ($click)="menuActionNone()">
+            Return To Planner
+          </div>
+        {{/if}}
+      </div>
+      <div class="menu-action-right">
+        <div class="menu-action-message">
+          {{{message}}}
+          <br>
+          <br>
+          {{#if showPrintButtonOnMessage}}
+            <div class="button" ($click)="menuActionPrint()">
+              Print Plan
+            </div>
+          {{/if}}
+          {{#if showReturnButtonOnMessage}}
+            <div class="button" ($click)="menuActionNone()">
+              Return To Planner
+            </div>
+          {{/if}}
+        </div>
+      </div>
+    {{/is}}
+
+    {{asset "inline-cache"}}
+
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="svg-roomplanner/index.stache!done-autorender"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>

@@ -1,0 +1,56 @@
+{{#if infoForPartControls}}
+	{{#if blurShield}}
+		<div class="blur-shield"></div>
+	{{/if}}
+	<div class="part-controls {{#allowResize}}resizeable{{/allowResize}}" {{#infoForPartControls}}style="
+		width: {{infoForPartControls.pxWidth}}px;
+		height: {{infoForPartControls.pxHeight}}px;
+		left: {{infoForPartControls.pxLeftTopX}}px;
+		top: {{infoForPartControls.pxLeftTopY}}px;
+		-webkit-transform: rotate( {{infoForPartControls.rotation}}deg );
+		transform: rotate( {{infoForPartControls.rotation}}deg );
+	"{{/infoForPartControls}}>
+		<div class="resizehandle top left"></div>
+		<div class="resizehandle top right"></div>
+		<div class="resizehandle bottom left"></div>
+		<div class="resizehandle bottom right"></div>
+		<div class="rotationhandle icon-rotate"></div>
+	</div>
+	{{#infoForPartControls}}
+		<div class="part-options" style="
+			left: {{infoForPartControls.pxOptionsX}}px;
+			top: {{infoForPartControls.pxOptionsY}}px;
+		">
+			<div class="part-title">{{infoForPartControls.partTitle}}<div>
+			<div class="part-dimensions">
+				{{#allowResize}}
+					<input class="width" type="text" value="{{round2DecimalPlaces( infoForPartControls.unitsWidth )}}">" x
+					<input class="height" type="text" value="{{round2DecimalPlaces( infoForPartControls.unitsHeight )}}">"
+				{{else}}
+					{{round2DecimalPlaces( infoForPartControls.unitsWidth )}}" x
+					{{round2DecimalPlaces( infoForPartControls.unitsHeight )}}"
+				{{/allowResize}}
+			</div>
+			<div class="part-menu">
+				<i class="icon-lock-open"></i>
+				<i class="icon-clone"></i>
+				<i class="icon-trash-can"></i>
+			</div>
+		</div>
+	{{/infoForPartControls}}
+{{/if}}
+{{#measurmentState}}
+	<div class="measurment-field">
+		{{#measurementInfo}}
+			<div class="measuerment-info" style="
+				left: {{measurementInfo.pxX}}px;
+				top: {{measurementInfo.pxY}}px;
+			">
+				{{measurementInfo.value}}
+			</div>
+		{{/measurementInfo}}
+	</div>
+{{/measurmentState}}
+<div class="floor-x">{{getValueString( width )}}</div>
+<div class="floor-y">{{getValueString( height )}}</div>
+<i class="icon-tape-measure {{#if measurmentState}}measurement-state-on{{/if}}"></i>
