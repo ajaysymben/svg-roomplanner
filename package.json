@@ -1,9 +1,13 @@
 {
   "name": "svg-roomplanner",
-  "version": "0.0.0",
-  "description": "LICENSE",
-  "homepage": "https://github.com/ajaysymben/roomplanner#readme",
-  "author": "James0x57",
+  "version": "0.0.0", 
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "James0x57",
+    "email": "",
+    "url": ""
+  },
   "scripts": {
     "test": "testee src/test.html --browsers firefox --reporter Spec",
     "start": "NODE_ENV=production node api/",
@@ -58,13 +62,5 @@
   },
   "engines": {
     "node": "0.12.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ajaysymben/roomplanner.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ajaysymben/roomplanner/issues"
   }
 }
